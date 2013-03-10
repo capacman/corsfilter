@@ -1,3 +1,5 @@
+package com.globalmaksimum.web.filter;
+
 /*******************************************************************************
  * Copyright 2012 Apigee Corporation
  * 
