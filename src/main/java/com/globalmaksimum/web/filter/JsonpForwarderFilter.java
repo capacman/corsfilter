@@ -40,9 +40,12 @@ public class JsonpForwarderFilter implements Filter {
 				System.out.println("location value found " + locationValue);
 				if (locationValue.contains("ticket")) {
 					System.out.println("location value contains ticket");
-					String newLocation = locationValue+"&callback="+callback+"&_="+timeValue;
-					System.out.println("newLocationValue "+newLocation);
+					String newLocation = locationValue + "&callback="
+							+ callback + "&_=" + timeValue;
+					System.out.println("newLocationValue " + newLocation);
 					res.sendRedirect(newLocation);
+				} else {
+					res.sendRedirect(locationValue);
 				}
 			}
 		} else {
@@ -77,7 +80,7 @@ public class JsonpForwarderFilter implements Filter {
 		@Override
 		public void sendRedirect(String location) throws IOException {
 			this.locationValue = location;
-			//prevent server from actually send redirect
+			// prevent server from actually send redirect
 		}
 
 	}
