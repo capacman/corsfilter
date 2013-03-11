@@ -31,14 +31,15 @@ public class JsonpForwarderFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		String callback = req.getParameter("callback");
 		String timeValue = req.getParameter("_");
-
+		LOGGER.info("callback {} timeValue {}", callback, timeValue);
 		if (callback != null) {
 			MyWrapper wrappedResponse = new MyWrapper(res);
 			chain.doFilter(request, wrappedResponse);
 			String locationValue = wrappedResponse.getLocationValue();
 			if (locationValue != null) {
 				LOGGER.info("location value found");
-				res.setHeader("Location", locationValue+"&callback="+callback+"&_"+timeValue);
+				res.setHeader("Location", locationValue + "&callback="
+						+ callback + "&_" + timeValue);
 			}
 		} else {
 			chain.doFilter(request, response);
