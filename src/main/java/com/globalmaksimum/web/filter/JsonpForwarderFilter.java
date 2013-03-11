@@ -77,7 +77,7 @@ public class JsonpForwarderFilter implements Filter {
 		@Override
 		public void sendRedirect(String location) throws IOException {
 			this.locationValue = location;
-			super.sendRedirect(location);
+			//prevent server from actually send redirect
 		}
 
 	}
