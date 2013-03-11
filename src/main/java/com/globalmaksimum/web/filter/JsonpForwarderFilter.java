@@ -31,13 +31,13 @@ public class JsonpForwarderFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		String callback = req.getParameter("callback");
 		String timeValue = req.getParameter("_");
-		LOGGER.info("callback {} timeValue {}", callback, timeValue);
+		System.out.println("callback " + callback + " timeValue " + timeValue);
 		if (callback != null) {
 			MyWrapper wrappedResponse = new MyWrapper(res);
 			chain.doFilter(request, wrappedResponse);
 			String locationValue = wrappedResponse.getLocationValue();
 			if (locationValue != null) {
-				LOGGER.info("location value found");
+				System.out.println("location value found "+locationValue);
 				res.setHeader("Location", locationValue + "&callback="
 						+ callback + "&_" + timeValue);
 			}
@@ -68,6 +68,12 @@ public class JsonpForwarderFilter implements Filter {
 
 		public String getLocationValue() {
 			return locationValue;
+		}
+
+		@Override
+		public void sendRedirect(String location) throws IOException {
+			this.locationValue = location;
+			super.sendRedirect(location);
 		}
 
 	}
