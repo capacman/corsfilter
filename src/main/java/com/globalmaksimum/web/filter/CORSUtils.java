@@ -68,7 +68,9 @@ public class CORSUtils {
 		}
 
 		boolean origin_sent = false;
-		if (request.getHeader(ORIGIN_HEADER) != null) {
+		response.addHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+		response.addHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		/*if (request.getHeader(ORIGIN_HEADER) != null) {
 			@SuppressWarnings("unchecked")
 			Enumeration<String> e = request.getHeaders(ORIGIN_HEADER);
 			while (e.hasMoreElements()) {
@@ -90,7 +92,7 @@ public class CORSUtils {
 			}
 		} else {
 			response.addHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
-		}
+		}*/
 
 	}
 
