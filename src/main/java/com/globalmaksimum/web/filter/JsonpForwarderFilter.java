@@ -48,7 +48,7 @@ public class JsonpForwarderFilter implements Filter {
 					String newLocation = locationValue + "?callback="
 							+ callback + "&_=" + timeValue;
 					System.out.println("newLocationValue " + newLocation);
-					res.sendRedirect(locationValue);
+					res.sendRedirect(newLocation);
 				}
 			}
 		} else {
