@@ -37,9 +37,13 @@ public class JsonpForwarderFilter implements Filter {
 			chain.doFilter(request, wrappedResponse);
 			String locationValue = wrappedResponse.getLocationValue();
 			if (locationValue != null) {
-				System.out.println("location value found "+locationValue);
-				res.setHeader("Location", locationValue + "&callback="
-						+ callback + "&_" + timeValue);
+				System.out.println("location value found " + locationValue);
+				if (locationValue.contains("ticket")) {
+					System.out.println("location value contains ticket");
+					String newLocation = locationValue+"&callback="+callback+"&_="+timeValue;
+					System.out.println("newLocationValue "+newLocation);
+					res.sendRedirect(newLocation);
+				}
 			}
 		} else {
 			chain.doFilter(request, response);
